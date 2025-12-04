@@ -1,0 +1,37 @@
+SAYMON GABRIEL
+
+#define LDR A0
+#define LED 2
+float adc_ldr = 0.0;
+
+float media = 0.0;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
+}
+
+void loop()
+{
+  //adc_ldr = analogRead(A0);
+  //Serial.print("Leitura LDR:");
+  //Serial.println(adc_ldr);
+
+  for (int i=0;i < 100 ; i++)
+  {
+    adc_ldr += analogRead(A0);
+  } media =adc_ldr / 100;
+  Serial.print("Leitura LDR:");
+  Serial.println(media);
+  if(media>= 1000)
+  {
+    digitalWrite(LED, HIGH);
+  }
+  else //Claro tensao baixa
+  {
+    digitalWrite(LED, LOW);
+  }
+  adc_ldr = 0.0;
+  media = 0.0;
+}
